@@ -357,6 +357,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "889 Construct Binary Tree f
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2467 Most Profitable Path in a Tree", "2467 Most Profitable Path in a Tree\2467 Most Profitable Path in a Tree.vcxproj", "{1BB303A5-29CE-4973-9733-5770116A585A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utilities", "utilities", "{DF0B3D3A-096E-4D16-9D6A-EE51095F2796}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryTreeUtil", "BinaryTreeUtil\BinaryTreeUtil.vcxproj", "{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1645,6 +1649,14 @@ Global
 		{1BB303A5-29CE-4973-9733-5770116A585A}.Release|x64.Build.0 = Release|x64
 		{1BB303A5-29CE-4973-9733-5770116A585A}.Release|x86.ActiveCfg = Release|Win32
 		{1BB303A5-29CE-4973-9733-5770116A585A}.Release|x86.Build.0 = Release|Win32
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Debug|x64.ActiveCfg = Debug|x64
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Debug|x64.Build.0 = Debug|x64
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Debug|x86.ActiveCfg = Debug|Win32
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Debug|x86.Build.0 = Debug|Win32
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Release|x64.ActiveCfg = Release|x64
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Release|x64.Build.0 = Release|x64
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Release|x86.ActiveCfg = Release|Win32
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1826,5 +1838,6 @@ Global
 		{59B22DF2-5A19-451D-82F5-6CE4906EFEAE} = {F8634DA4-E2F0-4DF3-AF75-199E6541DB57}
 		{B87C756C-9759-40BE-8A0B-60C143836D73} = {F8634DA4-E2F0-4DF3-AF75-199E6541DB57}
 		{1BB303A5-29CE-4973-9733-5770116A585A} = {F8634DA4-E2F0-4DF3-AF75-199E6541DB57}
+		{DD0E27DE-278E-4B9E-B5E7-6E71568650E9} = {DF0B3D3A-096E-4D16-9D6A-EE51095F2796}
 	EndGlobalSection
 EndGlobal
