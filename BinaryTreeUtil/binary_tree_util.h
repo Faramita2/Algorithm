@@ -3,101 +3,113 @@
 #define BINARY_TREE_UTIL_H
 
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
 
-class BinaryTreeUtil {
-public:
-	struct TreeNode {
-		int val;
-		TreeNode* left;
-		TreeNode* right;
-		TreeNode() : val(0), left(nullptr), right(nullptr) {}
-		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-	};
+class BinaryTreeUtil
+{
+  public:
+    struct TreeNode
+    {
+        int       val;
+        TreeNode *left;
+        TreeNode *right;
 
-	// ∏˘æ› ˝◊ÈππΩ®∂˛≤Ê ˜
-	static TreeNode* buildTree(const std::vector<int>& nums) {
-		if (nums.empty() || nums[0] == -1) return nullptr; // ø’ ˜ªÚŒﬁ–ß ‰»Î
+        TreeNode() : val(0), left(nullptr), right(nullptr)
+        {
+        }
+        TreeNode(int x) : val(x), left(nullptr), right(nullptr)
+        {
+        }
+        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right)
+        {
+        }
+    };
 
-		TreeNode* root = new TreeNode(nums[0]);
-		std::queue<TreeNode*> q;
-		q.push(root);
+    static TreeNode *buildTree(const std::vector<int> &nums)
+    {
+        if (nums.empty() || nums[0] == -1)
+            return nullptr;
 
-		int i = 1;
-		while (!q.empty() && i < nums.size()) {
-			TreeNode* curr = q.front();
-			q.pop();
+        TreeNode              *root = new TreeNode(nums[0]);
+        std::queue<TreeNode *> q;
+        q.push(root);
 
-			// ◊Û◊”Ω⁄µ„
-			if (i < nums.size() && nums[i] != -1) {
-				curr->left = new TreeNode(nums[i]);
-				q.push(curr->left);
-			}
-			i++;
+        int i = 1;
+        while (!q.empty() && i < nums.size()) {
+            TreeNode *curr = q.front();
+            q.pop();
 
-			// ”“◊”Ω⁄µ„
-			if (i < nums.size() && nums[i] != -1) {
-				curr->right = new TreeNode(nums[i]);
-				q.push(curr->right);
-			}
-			i++;
-		}
+            if (i < nums.size() && nums[i] != -1) {
+                curr->left = new TreeNode(nums[i]);
+                q.push(curr->left);
+            }
+            i++;
 
-		return root;
-	}
+            if (i < nums.size() && nums[i] != -1) {
+                curr->right = new TreeNode(nums[i]);
+                q.push(curr->right);
+            }
+            i++;
+        }
 
-	// ¥Ú”°∂˛≤Ê ˜£® ˜–ŒΩ·ππ£©
-	static void printTree(TreeNode* root) {
-		if (!root) {
-			std::cout << "ø’ ˜" << std::endl;
-			return;
-		}
+        return root;
+    }
 
-		//  π”√µ›πÈ¥Ú”° ˜–ŒΩ·ππ
-		printTreeHelper(root, 0, std::vector<bool>());
-	}
+    static void printTree(TreeNode *root)
+    {
+        if (!root) {
+            std::cout << "Empty Tree" << std::endl;
+            return;
+        }
 
-	// ∏®÷˙∫Ø ˝£∫µ›πÈ¥Ú”° ˜–ŒΩ·ππ
-	static void printTreeHelper(TreeNode* root, int depth, std::vector<bool> flag) {
-		if (!root) return;
+        printTreeHelper(root, 0, std::vector<bool>());
+    }
 
-		// ¥Ú”°µ±«∞Ω⁄µ„
-		for (int i = 0; i < depth; i++) {
-			if (i == depth - 1) {
-				std::cout << (flag[depth - 1] ? "©¿©§©§ " : "©∏©§©§ ");
-			}
-			else {
-				std::cout << (flag[i] ? "©¶   " : "    ");
-			}
-		}
-		std::cout << root->val << std::endl;
+    static void printTreeHelper(TreeNode *root, int depth, std::vector<bool> flag)
+    {
+        if (!root)
+            return;
 
-		// µ›πÈ¥Ú”°”“◊” ˜
-		if (root->right) {
-			flag.push_back(true);
-			printTreeHelper(root->right, depth + 1, flag);
-			flag.pop_back();
-		}
+        // ÊâìÂç∞ÂâçÁºÄÔºöË°®Á§∫Â±ÇÁ∫ßÂÖ≥Á≥ª
+        for (int i = 0; i < depth; i++) {
+            if (i == depth - 1) {
+                std::cout << (flag[i] ? "‚îú‚îÄ‚îÄ " : "‚îî‚îÄ‚îÄ "); // ÊúÄÂêé‰∏ÄÂ±Ç‰ΩøÁî®‰∏çÂêåÁöÑÁ¨¶Âè∑
+            } else {
+                std::cout << (flag[i] ? "‚îÇ   " : "    "); // ‰∏≠Èó¥Â±Ç‰ΩøÁî®Á´ñÁ∫øÊàñÁ©∫Ê†º
+            }
+        }
+        std::cout << root->val << std::endl; // ÊâìÂç∞ÂΩìÂâçËäÇÁÇπÂÄº
 
-		// µ›πÈ¥Ú”°◊Û◊” ˜
-		if (root->left) {
-			flag.push_back(false);
-			printTreeHelper(root->left, depth + 1, flag);
-			flag.pop_back();
-		}
-	}
+        // Ê†áËÆ∞ÊòØÂê¶ËøòÊúâÂêéÁª≠ÂÖÑÂºüËäÇÁÇπ
+        bool hasRight = root->right != nullptr;
+        bool hasLeft  = root->left != nullptr;
 
+        // ÈÄíÂΩíÊâìÂç∞Âè≥Â≠êÊ†ë
+        if (hasRight) {
+            flag.push_back(hasLeft); // Â¶ÇÊûúÂ∑¶Â≠êÊ†ëÂ≠òÂú®ÔºåÂàôÊ†áËÆ∞‰∏∫ true
+            printTreeHelper(root->right, depth + 1, flag);
+            flag.pop_back(); // ÂõûÊ∫Ø
+        }
 
-	//  Õ∑≈∂˛≤Ê ˜ƒ⁄¥Ê£®∑¿÷πƒ⁄¥Ê–π¬©£©
-	static void deleteTree(TreeNode* root) {
-		if (!root) return;
-		deleteTree(root->left);
-		deleteTree(root->right);
-		delete root;
-	}
+        // ÈÄíÂΩíÊâìÂç∞Â∑¶Â≠êÊ†ë
+        if (hasLeft) {
+            flag.push_back(false); // Â∑¶Â≠êÊ†ëÊòØÊúÄÂêé‰∏Ä‰∏™ÂàÜÊîØÔºåÊ†áËÆ∞‰∏∫ false
+            printTreeHelper(root->left, depth + 1, flag);
+            flag.pop_back(); // ÂõûÊ∫Ø
+        }
+    }
+
+    static void deleteTree(TreeNode *root)
+    {
+        if (!root)
+            return;
+        deleteTree(root->left);
+        deleteTree(root->right);
+        delete root;
+    }
 };
 
 #endif // BINARY_TREE_UTIL_H
+
 using TreeNode = BinaryTreeUtil::TreeNode;
