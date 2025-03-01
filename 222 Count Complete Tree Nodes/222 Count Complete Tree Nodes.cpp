@@ -36,8 +36,8 @@ int main()
     Solution s;
 
     // Input: root = [1,2,3,4,5,6]
-    std::vector<int> nums1 = {1, 2, 3, 4, 5, 6};
-    TreeNode        *root1 = BinaryTreeUtil::buildTree(nums1);
+    vector<int> nums1 = {1, 2, 3, 4, 5, 6};
+    TreeNode   *root1 = BinaryTreeUtil::buildTree(nums1);
     std::cout << "Print Tree: " << std::endl;
     BinaryTreeUtil::printTree(root1);
 
