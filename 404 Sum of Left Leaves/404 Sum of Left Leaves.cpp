@@ -8,7 +8,7 @@ class Solution
   public:
     int sumOfLeftLeaves(TreeNode *root)
     {
-        return addLeft(root);
+        return postOrder(root);
     }
 
   private:
@@ -27,6 +27,22 @@ class Solution
         }
 
         return sum;
+    }
+
+    int postOrder(TreeNode *node)
+    {
+        if (node == nullptr)
+            return 0;
+
+        int leftSum  = postOrder(node->left);
+        int rightSum = postOrder(node->right);
+
+        int currSum = 0;
+        if (node->left != nullptr && node->left->left == nullptr && node->left->right == nullptr) {
+            currSum += node->left->val;
+        }
+
+        return leftSum + rightSum + currSum;
     }
 };
 
