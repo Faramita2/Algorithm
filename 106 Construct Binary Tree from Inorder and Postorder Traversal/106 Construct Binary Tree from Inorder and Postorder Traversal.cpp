@@ -1,29 +1,38 @@
 #include "../BinaryTreeUtil/binary_tree_util.h"
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 using namespace std;
 
 class Solution
 {
+    unordered_map<int, int> m;
+    vector<int>             inorder;
+    vector<int>             postorder;
+
   public:
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
+        for (int i = 0; i < inorder.size(); i++) {
+            m[inorder[i]] = i;
+        }
+        this->inorder   = inorder;
+        this->postorder = postorder;
+        return build(0, inorder.size(), 0, postorder.size());
     }
 
-    TreeNode *build(vector<int> &inorder, vector<int> &postorder, int start, int end)
+    TreeNode *build(int inLeft, int inRight, int postLeft, int postRight)
     {
-        if (postorder.size() == 0)
+        if (postRight == postLeft)
             return nullptr;
-        TreeNode *root = new TreeNode(postorder.back());
-        if (postorder.size() == 1)
+        TreeNode *root = new TreeNode(postorder[postRight - 1]);
+        if (postRight - postLeft == 1)
             return root;
-        int index;
-        for (index = start; index < end; index++) {
-            if (inorder[index] == root->val)
-                break;
-        }
-
-        root->left = build(inorderLeft, inorderRight, );
+        int inMid           = m[root->val];
+        int leftSubtreeSize = inMid - inLeft;
+        root->left          = build(inLeft, inMid, postLeft, postLeft + leftSubtreeSize);
+        root->right         = build(inMid + 1, inRight, postLeft + leftSubtreeSize, postRight - 1);
+        return root;
     }
 };
 
