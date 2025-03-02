@@ -67,6 +67,7 @@
         "complex": "cpp",
         "algorithm": "cpp",
         "numeric": "cpp",
-        "binary_tree_util": "cpp"
+        "binary_tree_util": "cpp",
+        "fstream": "cpp"
     }
 }

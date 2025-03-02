@@ -1,4 +1,5 @@
 #include "../BinaryTreeUtil/binary_tree_util.h"
+#include "../PerformanceMonitor/performance_monitor.h"
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -48,16 +49,21 @@ class Solution
 
 int main()
 {
-    Solution s;
+    Solution           s;
+    PerformanceMonitor monitor;
     // Input: nums = [3,2,1,6,0,5]
     vector<int> nums1 = {3, 2, 1, 6, 0, 5};
-    TreeNode   *root1 = s.constructMaximumBinaryTree(nums1);
+    monitor.start();
+    TreeNode *root1 = s.constructMaximumBinaryTree(nums1);
+    monitor.stop();
     BinaryTreeUtil::printTree(root1);
     // Output: [6,3,5,null,2,0,null,null,1]
 
     // Input: nums = [3,2,1]
     vector<int> nums2 = {3, 2, 1};
-    TreeNode   *root2 = s.constructMaximumBinaryTree(nums2);
+    monitor.start();
+    TreeNode *root2 = s.constructMaximumBinaryTree(nums2);
+    monitor.stop();
     BinaryTreeUtil::printTree(root2);
     // Output: [3,null,2,null,1]
 
