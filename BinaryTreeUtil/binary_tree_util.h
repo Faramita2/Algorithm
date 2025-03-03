@@ -26,6 +26,18 @@ class BinaryTreeUtil
         }
     };
 
+    static TreeNode *findNode(TreeNode *root, int target)
+    {
+        if (root == nullptr)
+            return nullptr;
+        if (root->val == target)
+            return root;
+        TreeNode *left = findNode(root->left, target);
+        if (left)
+            return left;
+        return findNode(root->right, target);
+    }
+
     static TreeNode *buildTree(const std::vector<int> &nums)
     {
         if (nums.empty() || nums[0] == -1)
