@@ -1,24 +1,51 @@
+#include "../BinaryTreeUtil/binary_tree_util.h"
+#include "../PerformanceMonitor/performance_monitor.h"
+#include <cassert>
 #include <iostream>
+#include <string>
 #include <vector>
+
 using namespace std;
 
-class Solution {
-public:
-	struct TreeNode {
-		int val;
-		TreeNode* left;
-		TreeNode* right;
-		TreeNode() : val(0), left(nullptr), right(nullptr) {}
-		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-	};
+class Solution
+{
+  public:
+    TreeNode *sortedArrayToBST(vector<int> &nums)
+    {
+        return midNode(nums, 0, nums.size());
+    }
 
-	TreeNode* sortedArrayToBST(vector<int>& nums) {
+    TreeNode *midNode(vector<int> &nums, int low, int high)
+    {
+        if (low >= high)
+            return nullptr;
 
-	}
+        int  mid  = low + (high - low) / 2;
+        auto root = new TreeNode(nums[mid]);
+
+        root->left  = midNode(nums, low, mid);
+        root->right = midNode(nums, mid + 1, high);
+
+        return root;
+    }
 };
 
 int main()
 {
-	std::cout << "Hello World!\n";
+    Solution           solution;
+    PerformanceMonitor monitor;
+
+    // Input: nums = [-10,-3,0,5,9]
+    vector<int> nums1 = {-10, -3, 0, 5, 9};
+    auto        root1 = solution.sortedArrayToBST(nums1);
+    BinaryTreeUtil::printTree(root1);
+    // Output: [0,-3,9,-10,null,5]
+
+    // Input: nums = [1,3]
+    vector<int> nums2 = {1, 3};
+    auto        root2 = solution.sortedArrayToBST(nums2);
+    BinaryTreeUtil::printTree(root2);
+    // Output: [3,1]
+
+    return 0;
 }
