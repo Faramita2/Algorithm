@@ -68,6 +68,8 @@
         "algorithm": "cpp",
         "numeric": "cpp",
         "binary_tree_util": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "map": "cpp"
     }
 }
