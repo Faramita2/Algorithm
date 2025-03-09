@@ -19,12 +19,6 @@ class Solution
                 dp[i] += dp[i - j] * dp[j - 1];
             }
         }
-
-        for (auto v : dp) {
-            v *= 2;
-            cout << v << " ";
-        }
-        cout << endl;
         return dp[n];
     }
 };
