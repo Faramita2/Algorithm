@@ -48,6 +48,6 @@ class Solution
 int main()
 {
     Solution solution;
-    solution.solve();
+    solution.numberOfAlternatingGroups();
     return 0;
 }
