@@ -24,6 +24,10 @@ class Solution
         dp[0] = true;
         for (int num : nums) {
             for (int j = target; j >= num; j--) {
+                for (bool i : dp) {
+                    cout << i << " ";
+                }
+                cout << endl;
                 dp[j] = dp[j] || dp[j - num];
             }
         }
