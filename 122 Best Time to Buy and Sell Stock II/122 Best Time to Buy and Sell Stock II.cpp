@@ -12,6 +12,24 @@ class Solution
   public:
     int maxProfit(vector<int> &prices)
     {
+        if (prices.size() == 1)
+            return 0;
+        vector<pair<int, int>> dp(prices.size(), {0, 0});
+        // first: hold, second: unhold
+        dp[0].first = -prices[0];
+
+        for (int i = 1; i < prices.size(); i++) {
+            // keep "hold" state like previous or buy a new stock when previous is "unhold"
+            int hold = max(dp[i - 1].first, dp[i - 1].second - prices[i]);
+            // keep "unhold" state like previous or sell the previous stock to be "unhold"
+            int unhold = max(dp[i - 1].second, dp[i - 1].first + prices[i]);
+            dp[i]      = {hold, unhold};
+        }
+        return dp.back().second;
+    }
+
+    int maxProfit_(vector<int> &prices)
+    {
         int res = 0;
         for (int i = 1; i < prices.size(); i++) {
             res += max(prices[i] - prices[i - 1], 0);
