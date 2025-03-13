@@ -1,33 +1,64 @@
+#include "../BinaryTreeUtil/binary_tree_util.h"
+#include "../PerformanceMonitor/performance_monitor.h"
+#include <cassert>
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
-class Solution {
-public:
-	struct TreeNode {
-		int val;
-		TreeNode* left;
-		TreeNode* right;
-		TreeNode() : val(0), left(nullptr), right(nullptr) {}
-		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-	};
+using namespace std;
 
-	int rob(TreeNode* root) {
+class Solution
+{
+    unordered_map<TreeNode *, pair<int, int>> m;
 
-	}
+  private:
+    pair<int, int> lrn(TreeNode *root)
+    {
+        if (root == nullptr)
+            return {0, 0};
+
+        if (m.count(root)) {
+            return m[root];
+        }
+
+        auto ldp = lrn(root->left);
+        auto rdp = lrn(root->right);
+
+        int notRob = max(ldp.first, ldp.second) + max(rdp.first, rdp.second);
+        int rob    = root->val + ldp.first + rdp.first;
+
+        m[root] = {notRob, rob};
+
+        return m[root];
+    }
+
+  public:
+    int rob(TreeNode *root)
+    {
+        auto res = lrn(root);
+        return max(res.first, res.second);
+    }
 };
 
 int main()
 {
-	std::cout << "Hello World!\n";
+    Solution           solution;
+    PerformanceMonitor monitor;
+
+    // Input: root = [3,2,3,-1,3,-1,1]
+    vector<int> nums1 = {3, 2, 3, -1, 3, -1, 1};
+    TreeNode   *root1 = BinaryTreeUtil::buildTree(nums1);
+    cout << solution.rob(root1) << endl;
+    // Output: 7
+
+    // Input: root = [3,4,5,1,3,-1,1]
+    vector<int> nums2 = {3, 4, 5, 1, 3, -1, 1};
+    TreeNode   *root2 = BinaryTreeUtil::buildTree(nums2);
+    cout << solution.rob(root2) << endl;
+    // Output: 9
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
