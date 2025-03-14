@@ -73,5 +73,6 @@
         "map": "cpp",
         "span": "cpp",
         "bit": "cpp"
-    }
+    },
+    "idf.pythonInstallPath": "/usr/bin/python3"
 }
