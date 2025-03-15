@@ -16,7 +16,6 @@ class Solution
     {
         int                 len = s.length();
         vector<vector<int>> dp(len, vector<int>(len, 0));
-        int                 maxLen = 0;
         for (int i = len - 1; i >= 0; i--) {
             for (int j = i; j < len; j++) {
                 if (s[i] == s[j]) {
@@ -28,11 +27,10 @@ class Solution
                 } else {
                     dp[i][j] = max(dp[i][j - 1], dp[i + 1][j]);
                 }
-                maxLen = max(dp[i][j], maxLen);
             }
         }
 
-        return maxLen;
+        return dp[0][len - 1];
     }
 };
 
