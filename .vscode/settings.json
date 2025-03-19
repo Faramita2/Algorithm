@@ -72,7 +72,8 @@
         "iomanip": "cpp",
         "map": "cpp",
         "span": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "filesystem": "cpp"
     },
     "idf.pythonInstallPath": "/usr/bin/python3"
 }
